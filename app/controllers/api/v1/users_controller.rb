@@ -3,7 +3,9 @@ class Api::V1::UsersController < ApplicationController
 
     def profile
         user = current_user
-        render json: user, status: :accepted
+        feed = (user.followees.each_with_object([]) {|followee, arr| arr << followee.haikus}).flatten
+        feed = feed.map {|haiku| HaikuSerializer.new(haiku)}
+        render json: {user: UserSerializer.new(user), feed: feed}, status: :accepted
     end
 
     def index
