@@ -1,6 +1,7 @@
 # require 'httparty'
 # require 'JSON'
 
+
 # 200.times do 
 
 #     response = HTTParty.get('https://api.thecatapi.com/v1/images/search')
@@ -37,24 +38,24 @@
 
 
 
-i = 0
-50.times do
-    Relationship.create(follower_id: i, followee_id: 194)
-    i += 1
-end
+# i = 0
+# 50.times do
+#     Relationship.create(follower_id: i, followee_id: 194)
+#     i += 1
+# end
 
-j = 0
-50.times do
-    Relationship.create(follower_id: 194 , followee_id: j)
-    j += 1
-end
+# j = 0
+# 50.times do
+#     Relationship.create(follower_id: 194 , followee_id: j)
+#     j += 1
+# end
 
-50.times do
-    Haiku.create(first:"test one two three test", second:"this is just a test poem", third:"i repeat, a test", user_id: 194)
-end
+# 50.times do
+#     Haiku.create(first:"test one two three test", second:"this is just a test poem", third:"i repeat, a test", user_id: 194)
+# end
 
 
-75.times do
-    haiku = (Haiku.all - User.last.favorites).sample
-    Favorite.create(haiku: haiku, user_id: 194) 
-end
+# 75.times do
+#     haiku = (Haiku.all - User.last.favorites).sample
+#     Favorite.create(haiku: haiku, user_id: 194) 
+# end
