@@ -8,7 +8,6 @@ class User < ApplicationRecord
 
     has_many :favorites
     has_many :haikus
-    # has_many :haikus, through: :favorites
 
 
     validates :username, presence: true
