@@ -3,5 +3,4 @@ class UserSerializer < ActiveModel::Serializer
     has_many :haikus
     has_many :followers
     has_many :followees
-    has_many :favorites
 end
