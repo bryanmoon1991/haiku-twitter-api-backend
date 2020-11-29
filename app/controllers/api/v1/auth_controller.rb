@@ -7,7 +7,14 @@ class Api::V1::AuthController < ApplicationController
     if user && user.authenticate(user_login_params[:password])
       # encode token comes from ApplicationController
       token = encode_token({ user_id: user.id })
-      render json: { user: UserSerializer.new(user), jwt: token }, status: :accepted
+
+      feed = (user.followees.each_with_object([]) {|followee, arr| arr << followee.haikus}).flatten
+      feed = feed.map {|haiku| HaikuSerializer.new(haiku)}
+      
+      unfollowedUsers = User.all - user.followees
+      unfollowedUsers = unfollowedUsers.map { |user| BasicUserSerializer.new(user) }
+
+      render json: { user: UserSerializer.new(user), feed: feed, jwt: token, unfollowedUsers: unfollowedUsers}, status: :accepted
     else
       render json: { message: 'Invalid username or password' }, status: :unauthorized
     end

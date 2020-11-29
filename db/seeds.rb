@@ -28,15 +28,21 @@
 
 # i = 0
 # 50.times do
-#     Relationship.create(follower_id: 93, followee_id: i)
+#     Relationship.create(follower_id: i, followee_id: 90)
 #     i += 1
 # end
 
+# j = 0
 # 50.times do
-#     Haiku.create(first:"test one two three test", second:"this is just a test poem", third:"i repeat, a test", user_id: 93)
+#     Relationship.create(follower_id: 90 , followee_id: j)
+#     j += 1
+# end
+
+# 50.times do
+#     Haiku.create(first:"test one two three test", second:"this is just a test poem", third:"i repeat, a test", user_id: 90)
 # end
 
 
 # 75.times do
-#    Favorite.create(haiku: Haiku.all.sample, user_id: 93) 
+#    Favorite.create(haiku: Haiku.all.sample, user_id: 90) 
 # end
