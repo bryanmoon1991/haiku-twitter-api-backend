@@ -46,6 +46,10 @@ haikus = [
     "Undoing respect, Sweetest taste with answers found, Boats sailing timely"
 ]
 
+25.times do 
+    Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user: User.all.sample)
+end
+
 
 # 1000.times do
 #     Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user: User.all.sample)
@@ -69,24 +73,24 @@ haikus = [
 
 
 
-i = 0
-50.times do
-    Relationship.create(follower_id: i, followee_id: 195)
-    i += 1
-end
+# i = 0
+# 50.times do
+#     Relationship.create(follower_id: i, followee_id: 195)
+#     i += 1
+# end
 
-j = 0
-50.times do
-    Relationship.create(follower_id: 195 , followee_id: j)
-    j += 1
-end
+# j = 0
+# 50.times do
+#     Relationship.create(follower_id: 195 , followee_id: j)
+#     j += 1
+# end
 
-50.times do
-    Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user_id: 195)
-end
+# 50.times do
+#     Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user_id: 195)
+# end
 
 
-75.times do
-    haiku = (Haiku.all - User.last.favorites).sample
-    Favorite.create(haiku: haiku, user_id: 195) 
-end
+# 75.times do
+#     haiku = (Haiku.all - User.last.favorites).sample
+#     Favorite.create(haiku: haiku, user_id: 195) 
+# end
