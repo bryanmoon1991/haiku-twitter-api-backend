@@ -1,3 +1,3 @@
 class FavoriteSerializer < ActiveModel::Serializer
-  attributes :haiku
+  attributes :haiku, :id
 end
