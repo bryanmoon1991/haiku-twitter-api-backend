@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index, :show] 
+    skip_before_action :authorized, only: [:create, :index, :show, :search] 
 
     def profile
         user = current_user
@@ -42,6 +42,7 @@ class Api::V1::UsersController < ApplicationController
             render json: { error: user.errors.full_messages }, status: :not_acceptable
         end
     end
+
 
     private
 
