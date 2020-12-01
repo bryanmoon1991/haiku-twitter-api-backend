@@ -12,11 +12,10 @@ class Api::V1::UsersController < ApplicationController
 
     def show
         user = User.find(params[:id])
-        favorites = user.favorites.each_with_object([]) { |favorite, arr| arr << favorite.haiku }
-        
+        favorites = user.favorites.each_with_object([]) { |favorite, arr| arr << {"haiku": favorite.haiku, "created_at": favorite.created_at} }
         user = UserSerializer.new(user)
-        favorites = favorites.map { |haiku| HaikuSerializer.new(haiku) }
-        render json: {user: user, favorites: favorites }
+        favorites = favorites.map { |object|{ haiku: HaikuSerializer.new(object[:"haiku"]), created_at: object[:'created_at']} }
+        render json: {user: user, favorites: favorites}
     end
 
     def index

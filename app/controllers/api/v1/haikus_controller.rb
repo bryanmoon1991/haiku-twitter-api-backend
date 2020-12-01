@@ -1,5 +1,5 @@
 class Api::V1::HaikusController < ApplicationController
-    skip_before_action :authorized, only: [:create, :index, :show] 
+    skip_before_action :authorized, only: [:create, :index, :show, :destroy] 
       
     def index
         haikus = Haiku.all 
@@ -13,6 +13,12 @@ class Api::V1::HaikusController < ApplicationController
        else
             render json: { error: haiku.errors.full_messages }, status: :not_acceptable 
        end
+    end
+
+    def destroy
+        haiku = Haiku.find(params[:id])
+        haiku.destroy
+        render json: haiku
     end
 
     private

@@ -13,10 +13,14 @@ class Api::V1::AuthController < ApplicationController
       
       unfollowedUsers = User.all - user.followees
       unfollowedUsers = unfollowedUsers.map { |user| BasicUserSerializer.new(user) }
-
+      
       render json: { user: UserSerializer.new(user), feed: feed, jwt: token, unfollowedUsers: unfollowedUsers}, status: :accepted
     else
-      render json: { message: 'Invalid username or password' }, status: :unauthorized
+      feed = (User.all.each_with_object([]) {|user, arr| arr << user.haikus}).flatten
+      feed = feed.map {|haiku| HaikuSerializer.new(haiku)}
+      userIndex = User.all
+      userIndex = userIndex.map {|user| BasicUserSerializer.new(user) }
+      render json: { message: 'Invalid username or password', feed: feed, userIndex: userIndex }, status: :unauthorized
     end
   end
 
