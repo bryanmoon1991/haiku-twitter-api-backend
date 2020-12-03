@@ -1,22 +1,22 @@
-require 'httparty'
-require 'JSON'
+# require 'httparty'
+# require 'JSON'
 
-200.times do 
-    response = HTTParty.get('https://api.thecatapi.com/v1/images/search')
-    image = JSON.parse(response.body)[0]['url']
-    User.create(username:Faker::Twitter.screen_name, name:Faker::Name.name, email:Faker::Internet.email, password:"password", bio:Faker::Quote.famous_last_words, image: image)
-end
+# 200.times do 
+#     response = HTTParty.get('https://api.thecatapi.com/v1/images/search')
+#     image = JSON.parse(response.body)[0]['url']
+#     User.create(username:Faker::Twitter.screen_name, name:Faker::Name.name, email:Faker::Internet.email, password:"password", bio:Faker::Quote.famous_last_words, image: image)
+# end
 
-puts "created Users"
+# puts "created Users"
 
-1000.times do
-    follower = User.all.sample
-    followee = (User.all - [follower] - [follower.followees]).sample
+# 1000.times do
+#     follower = User.all.sample
+#     followee = (User.all - [follower] - [follower.followees]).sample
  
-    Relationship.create(follower_id: follower.id, followee_id: followee.id)
-end
+#     Relationship.create(follower_id: follower.id, followee_id: followee.id)
+# end
 
-puts "created Relationships"
+# puts "created Relationships"
 
 haikus = [
     "Haiku for you all, Single click gives random one, Hope it brings you joy",
@@ -49,55 +49,54 @@ haikus = [
 
 
 
-1000.times do
-    Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user: User.all.sample)
-end
+# 1000.times do
+#     Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user: User.all.sample)
+# end
 
-puts "created Haikus"
+# puts "created Haikus"
 
 
-20.times do
-    User.all.each do |user|
-        haiku = (Haiku.all - user.favorites).sample
-        Favorite.create(haiku: haiku, user: user) 
-    end
-end
+# 20.times do
+#     User.all.each do |user|
+#         haiku = (Haiku.all - user.favorites).sample
+#         Favorite.create(haiku: haiku, user: user) 
+#     end
+# end
 
-puts "created Favorites"
+# puts "created Favorites"
 
 
 
 # after you create new user for your self run db:seed with below and comment out above
 
-# User.create(name: "Bryan Moon", username: "bmo99", password: "12345", bio:"yahoooo", image: "https://static.fandomspot.com/images/06/7215/25-sorata-sekai-ichi-hatsukoi-anime-screenshot.jpg")
 
-# puts "created main user"
+puts "created main user"
 
-# i = 0
-# 50.times do
-#     Relationship.create(follower_id: i, followee_id: 195)
-#     i += 1
-# end
+i = 0
+50.times do
+    Relationship.create(follower_id: i, followee_id: 195)
+    i += 1
+end
 
-# puts "created main user followers"
+puts "created main user followers"
 
-# j = 40
-# 50.times do
-#     Relationship.create(follower_id: 195 , followee_id: j)
-#     j += 1
-# end
+j = 40
+50.times do
+    Relationship.create(follower_id: 195 , followee_id: j)
+    j += 1
+end
 
-# puts "created main user followees"
+puts "created main user followees"
 
-# 50.times do
-#     Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user_id: 195)
-# end
+50.times do
+    Haiku.create(first:haikus.sample.split(", ")[0], second:haikus.sample.split(", ")[1], third:haikus.sample.split(", ")[2], user_id: 195)
+end
 
-# puts "created main user haikus"
+puts "created main user haikus"
 
-# 75.times do
-#     haiku = (Haiku.all - User.last.favorites).sample
-#     Favorite.create(haiku: haiku, user_id: 195) 
-# end
+75.times do
+    haiku = (Haiku.all - User.last.favorites).sample
+    Favorite.create(haiku: haiku, user_id: 195) 
+end
 
-# puts "created main user favorites"
+puts "created main user favorites"
